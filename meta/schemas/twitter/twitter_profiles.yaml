@@ -5,7 +5,7 @@ db:
     - screen_name
 columns:
   id:
-    type: Integer
+    type: BigInteger
   name:
     type: String
   screen_name:

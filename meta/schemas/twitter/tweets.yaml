@@ -11,7 +11,7 @@ columns:
   user_screen_name:
     type: String
   id:
-    type: Integer
+    type: BigInteger
   user_id:
     type: Integer
   source:

@@ -14,22 +14,19 @@ columns:
       - "B000944"
 
   twitter_id:
-    type: Integer
-    length: 64
+    type: BigInteger
     unsigned: true
   twitter_username:
     type: String
     length: 15
   facebook_id:
-    type: Integer
-    length: 64
+    type: BigInteger
     unsigned: true
   facebook_username:
     type: String
     length: 50
   instagram_id:
-    type: Integer
-    length: 64
+    type: BigInteger
     unsigned: true
   instagram_username:
     type: String
