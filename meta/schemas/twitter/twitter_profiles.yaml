@@ -1,0 +1,50 @@
+name: twitter_profiles
+db:
+  primary_key: id
+  indexes:
+    - screen_name
+columns:
+  id:
+    type: Integer
+  name:
+    type: String
+  screen_name:
+    type: String
+  location:
+    type: String
+  description:
+    type: String
+  url:
+    type: String
+  followers_count:
+    type: Integer
+  friends_count:
+    type: Integer
+  listed_count:
+    type: Integer
+  created_at:
+    type: DateTime
+    format: "2011-01-06 16:01:46"
+  favourites_count:
+    type: Integer
+  statuses_count:
+    type: Integer
+  utc_offset:
+    type: Integer
+  time_zone:
+    type: String
+  verified:
+    type: Boolean
+  geo_enabled:
+    type: Boolean
+  lang:
+    type: String
+  profile_image_url:
+    type: String
+  profile_background_image_url:
+    type: String
+  profile_background_color:
+    type: String
+  profile_link_color:
+    type: String
+

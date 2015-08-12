@@ -1,0 +1,13 @@
+name: friendships
+db:
+  primary_key:
+    - user_screen_name
+    - friend_id
+  indexes:
+    - friend_id
+
+columns:
+  user_screen_name:
+    type: String
+  friend_id:
+    type: Integer

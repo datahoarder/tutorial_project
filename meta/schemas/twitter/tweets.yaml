@@ -1,0 +1,39 @@
+name: tweets
+db:
+  primary_key: id
+  indexes:
+    - user_screen_name
+    - user_id
+    - created_at
+    - in_reply_to_screen_name
+    - retweeted_status_user_screen_name
+columns:
+  user_screen_name:
+    type: String
+  id:
+    type: Integer
+  user_id:
+    type: Integer
+  source:
+    type: String
+  created_at:
+    type: DateTime
+    format: "%Y-%m-%d %H:%M:%S"
+  retweet_count:
+    type: Integer
+  favorite_count:
+    type: Integer
+  text:
+    type: String
+  in_reply_to_screen_name:
+    type: String
+  in_reply_to_status_id:
+    type: Integer
+  retweeted_status_id:
+    type: Integer
+  retweeted_status_user_id:
+    type: Integer
+  retweeted_status_user_screen_name:
+    type: String
+
+

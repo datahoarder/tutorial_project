@@ -1,0 +1,207 @@
+name: candidate_summaries
+source:
+  homepage: http://www.fec.gov/finance/disclosure/ftpsum.shtml
+  info: http://www.fec.gov/finance/disclosure/metadata/DataDictionaryWEBALL.shtml
+
+db:
+  primary_key:
+    - CAND_ID
+    - cycle
+  indexes:
+    - CAND_ID
+    - PTY_CD
+    - cycle
+
+columns:
+  cycle:
+    type: String
+    length: 10
+    description: This is a string derived from the FEC file download that is added as a reference to each row.
+    examples:
+      - "2015-2016"
+  CAND_ID:
+    description: Candidate Identification
+    nullable: false
+    type: String
+    length: 9
+  CAND_NAME:
+    description: Candidate Name
+    nullable: true
+    type: String
+    length: 200
+  CAND_ICI:
+    description: Incumbent Challenger Status
+    nullable: true
+    type: String
+    length: 1
+  PTY_CD:
+    description: Party Code
+    nullable: true
+    type: String
+    length: 1
+  CAND_PTY_AFFILIATION:
+    description: Party Affiliation
+    nullable: true
+    type: String
+    length: 3
+  TTL_RECEIPTS:
+    description: Total Receipts
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  TRANS_FROM_AUTH:
+    description: Transfers from Authorized Committees
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  TTL_DISB:
+    description: Total Disbursements
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  TRANS_TO_AUTH:
+    description: Transfers to Authorized Committees
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  COH_BOP:
+    description: Beginning Cash
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  COH_COP:
+    description: Ending Cash
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CAND_CONTRIB:
+    description: Contributions from Candidate
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CAND_LOANS:
+    description: Loans from Candidate
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  OTHER_LOANS:
+    description: Other Loans
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CAND_LOAN_REPAY:
+    description: Candidate Loan Repayments
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  OTHER_LOAN_REPAY:
+    description: Other Loan Repayments
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  DEBTS_OWED_BY:
+    description: Debts Owed By
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  TTL_INDIV_CONTRIB:
+    description: Total Individual Contributions
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CAND_OFFICE_ST:
+    description: Candidate State
+    nullable: true
+    type: String
+    length: 2
+  CAND_OFFICE_DISTRICT:
+    description: Candidate District
+    nullable: true
+    type: String
+    length: 2
+  SPEC_ELECTION:
+    description: Special Election Status -- Election result data included in 1996-2006 files only.
+    nullable: true
+    type: String
+    length: 1
+  PRIM_ELECTION:
+    description: Primary Election Status -- Election result data included in 1996-2006 files only.
+    nullable: true
+    type: String
+    length: 1
+  RUN_ELECTION:
+    description: Runoff Election Status -- Election result data included in 1996-2006 files only.
+    nullable: true
+    type: String
+    length: 1
+  GEN_ELECTION:
+    description: General Election Status -- Election result data included in 1996-2006 files only.
+    nullable: true
+    type: String
+    length: 1
+  GEN_ELECTION_PRECENT:
+    description: "General Election Percentage -- Election result data included in 1996-2006 files only."
+    nullable: true
+    type: Float
+    length:
+    - 7
+    - 4
+  OTHER_POL_CMTE_CONTRIB:
+    description: Contributions from Other Political Committees
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  POL_PTY_CONTRIB:
+    description: Contributions from Party Committees
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CVG_END_DT:
+    description: Coverage End Date -- Through Date
+    nullable: true
+    type: Date
+    format: '%m/%d/%Y'
+  INDIV_REFUNDS:
+    description: Refunds to Individuals
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
+  CMTE_REFUNDS:
+    description: Refunds to Committees
+    nullable: true
+    type: Float
+    length:
+    - 14
+    - 2
