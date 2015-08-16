@@ -1,8 +1,13 @@
 from sqlalchemy import Table, Column, Index, PrimaryKeyConstraint
-from sqlalchemy import BigInteger, Boolean, Date, DateTime
-from sqlalchemy import Float, Integer, String
+from sqlalchemy import BigInteger, Boolean, Date, DateTime, Float, Integer, String
+
 # from sqlalchemy.schema import CreateTable, CreateIndex
 
+
+def build_primary_key(keynames):
+    keynames = keynames if type(keynames) is list else [keynames]
+    pk = PrimaryKeyConstraint(*keynames)
+    return pk
 
 def columnize(col_meta, name = None):
     """
@@ -42,7 +47,8 @@ def columnize(col_meta, name = None):
 
 
 
-def indexize(table_meta, table):
+def indexize(table, table_meta):
+    table_name = table.name
     indexes = []
     indexarr = table_meta['db'].get('indexes')
     if indexarr:
@@ -55,22 +61,3 @@ def indexize(table_meta, table):
     return indexes
 
 
-
-
-# turns one list and one table_schema into a SQLalchemy table
-# returns a Table
-def tableize(table_name, table_meta, metadata):
-    # set up the columns
-    columns = []
-    for c_name, col_sch in table_meta['columns'].items():
-        column = columnize(col_sch, c_name)
-        columns.append(column)
-    # set up the primary key
-    pkeys = table_meta['db'].get('primary_key')
-    if pkeys:
-        pkeys = pkeys if type(pkeys) is list else [pkeys]
-        pk = PrimaryKeyConstraint(*pkeys)
-        columns.append(pk) # ugly...
-    # initialize the table
-    table = Table(table_name, metadata, *columns)
-    return table
