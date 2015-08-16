@@ -5,14 +5,14 @@ from sqlalchemy import Float, Integer, String
 from sqlalchemy.schema import CreateTable, CreateIndex
 
 # creates a list schemas into a SQLalchemy thingy
-def metadbize(table_metas, db_path = None):
+def metadbize(table_metas, db_path = ""):
     """
         `table_metas`: a list of {'name': 'table_name', 'schema': schemadict}
 
     returns a MetaData object
     """
-    dbp = db_path if db_path else 'sqlite://'
-    engine = create_engine(dbp)
+    db_path = 'sqlite:///' + db_path if db_path else "sqlite://"
+    engine = create_engine(db_path)
     metadata = MetaData(engine)
     for tm in table_metas:
         tname, tmeta = tm
@@ -41,7 +41,6 @@ def tableize(table_name, table_meta, metadata):
         pk = PrimaryKeyConstraint(*pkeys)
         columns.append(pk) # ugly...
     # initialize the table
-    print("\n\n%s\n-------------" % table_name)
     table = Table(table_name, metadata, *columns)
     return table
 
@@ -94,5 +93,9 @@ def columnize(col_meta, name = None):
         atts = {}
         # column is nullable by default
         atts['nullable'] = False if col_meta.get('nullable') is False else True
+        # add format as necessary
+        if col_meta.get('format'):
+            fmt = col_meta['format']
+            atts['info'] = {'format': fmt}
         # make Column object
         return Column(c_name, c_type, **atts)

@@ -1,7 +1,10 @@
 from os.path import join
+from glob import glob
 from collections import namedtuple
 import scripts.package.sql_meta as sqm
+import scripts.package.sql_load as cq
 import rtyaml
+import os
 # load up the schemas
 # explicitly map them to file names
 SCHEMAS_DIR = './meta/schemas'
@@ -39,6 +42,38 @@ mytables = [
     MyTable('congress_twitter_profiles', xs['twitter_profiles'])
 ]
 
-mdb = sqm.metadbize(mytables)
+TMPNAME = "/tmp/funzzzz.sqlite"
+try:
+    os.remove(TMPNAME)
+except OSError:
+    pass
+mdb = sqm.metadbize(mytables, TMPNAME )
+# print(sqm.meta_to_sql(mdb))
+mdb.create_all()
 
-print(sqm.meta_to_sql(mdb))
+# Now load the data
+print("Loading data")
+data = open("./stash/seeds/twitter/congress-profiles.csv")
+cq.load_data_table(mdb, 'congress_twitter_profiles', data)
+
+
+data = open("./stash/seeds/congress_legislators/fec_ids.csv")
+cq.load_data_table(mdb, 'fec_ids', data)
+data = open("./stash/seeds/congress_legislators/legislators.csv")
+cq.load_data_table(mdb, 'legislators', data)
+data = open("./stash/seeds/congress_legislators/committee-memberships.csv")
+cq.load_data_table(mdb, 'committee_memberships', data)
+data = open("./stash/seeds/congress_legislators/committees.csv")
+cq.load_data_table(mdb, 'committees', data)
+data = open("./stash/seeds/congress_legislators/social-media-accounts.csv")
+cq.load_data_table(mdb, 'social_media_accounts', data)
+data = open("./stash/seeds/congress_legislators/terms.csv")
+cq.load_data_table(mdb, 'terms', data)
+
+print("Loading tweets...")
+# for idx, fn in enumerate(glob("./stash/seeds/twitter/tweets/*.csv")):
+for idx, fn in enumerate(glob("./stash/seeds/twitter/tweets/*.csv")):
+    print(idx, fn)
+    cq.load_data_table(mdb, 'tweets', open(fn))
+
+
